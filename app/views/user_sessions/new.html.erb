@@ -1,7 +1,7 @@
 <% content_for :header do -%>
   <%= configatron.site_name %> Login
 <% end -%>
-<% form_tag session_path, :id => 'new_session' do -%>
+<% form_tag user_sessions_path, :id => 'new_session' do -%>
   <p><label for="login"><%= User.human_attribute_name('login') %></label><br/>
   <%= text_field_tag 'login' %></p>
   <p><label for="password"><%= User.human_attribute_name('password') %></label><br/>
@@ -13,6 +13,29 @@
   <div id="submitbutton">
     <p><%= submit_tag t('.submit', :default => 'Log in &raquo;') %></p>
   </div>
-<% end -%>
-<%= javascript_tag "Form.focusFirstElement('new_session')" %>
 
+<% end -%>
+
+<% if false %><!-- start erb comment -->
+<% form_for @user_session do |f| %>
+
+  <%= f.error_messages %>
+
+  <%= f.label :login %>
+  <%= f.text_field :login %>
+  <%= f.error_message_on :login %>
+
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+  <%= f.error_message_on :password %>
+<fieldset class="buttons">
+
+    <%= f.submit 'Login!' %>
+    <%= f.check_box :remember_me %>
+    <%= f.label :remember_me, 'Remember me?', :class => 'check_box' %>
+</fieldset>
+
+<% end -%>
+<!-- end erb comment --><% end %>
+
+<%= javascript_tag "Form.focusFirstElement('new_session')" %>

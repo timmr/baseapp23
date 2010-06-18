@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe SessionsController do
+describe UserSessionsController do
 
   it "should create a new user session"
 
