@@ -4,8 +4,8 @@ ActionController::Routing::Routes.draw do |map|
   map.signup   '/signup',   :controller => 'users',    :action => 'new'
   map.register '/register', :controller => 'users',    :action => 'create'
   map.activate '/activate/:activation_code', :controller => 'users',    :action => 'activate'
-  map.login    '/login',    :controller => 'sessions', :action => 'new'
-  map.logout   '/logout',   :controller => 'sessions', :action => 'destroy', :conditions => {:method => :delete}
+  map.login    '/login',    :controller => 'user_sessions', :action => 'new'
+  map.logout   '/logout',   :controller => 'user_sessions', :action => 'destroy', :conditions => {:method => :delete}
 
   map.user_troubleshooting '/users/troubleshooting', :controller => 'users', :action => 'troubleshooting'
   map.user_forgot_password '/users/forgot_password', :controller => 'users', :action => 'forgot_password'
@@ -20,7 +20,7 @@ ActionController::Routing::Routes.draw do |map|
                                      :edit_avatar => :get,
                                      :update_avatar => :put }
 
-  map.resource :session
+  map.resources :user_sessions
 
   # Profiles
   map.resources :profiles

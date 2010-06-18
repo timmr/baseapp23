@@ -160,14 +160,15 @@ class UsersController < ApplicationController
     if @user.errors.empty?
       successful_creation(@user)
     else
+      logger.warn "SIGN-UP FAILED: for '#{params[:login]}' from #{request.remote_ip} at #{Time.now.utc}: #{@user.errors}"
       failed_creation
     end
   end
 
   def successful_creation(user)
-    redirect_back_or_default(root_path)
     flash[:notice] = t('users.successful_creation.flash.notice',
                     :default => "Thanks for signing up! We're sending you an email with your activation code.")
+    redirect_back_or_default(root_path)
   end
 
   def failed_creation(message = t('users.failed_creation.flash.error', :default => 'Sorry, there was an error creating your account'))

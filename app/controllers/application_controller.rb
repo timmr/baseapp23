@@ -46,7 +46,7 @@ class ApplicationController < ActionController::Base
       store_location
       flash[:notice] = t('app.security.session_expired',
         :default => "Your session has been expired by inactivity.") if do_flash
-      redirect_to new_session_url
+      redirect_to new_user_session_url
     end
   end
 
@@ -58,7 +58,7 @@ class ApplicationController < ActionController::Base
     unless current_user
       store_location
       flash[:notice] = t('app.security.unauthorized_access', :default => "You need to be logged in to access this page!")
-      redirect_to new_session_url
+      redirect_to new_user_session_url
       return false
     else
       return not_found unless authorized?

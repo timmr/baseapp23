@@ -5,7 +5,7 @@ def do_login
   activate_authlogic
   # TODO: Create a mock user
   user_mock = mock('User')
-  user_mock.stubs(:has_role? => true, :have_access? => true)
+  user_mock.stubs(:has_role? => true, :have_access? => true, :display_name => 'test')
 
   session_mock = mock('UserSession')
   session_mock.stubs(:user).returns(user_mock)
