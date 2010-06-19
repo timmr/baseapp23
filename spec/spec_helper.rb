@@ -6,6 +6,7 @@ require 'spec/autorun'
 require 'spec/rails'
 require 'rspec_rails_mocha'
 require File.expand_path(File.dirname(__FILE__) + "/test_helper")
+require File.expand_path(File.dirname(__FILE__) + '/mock_user_helper')
 
 
 Spec::Runner.configure do |config|

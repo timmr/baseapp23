@@ -35,7 +35,6 @@ def paginate_results(results)
    end
 end
 
-# here... look here! right below this
-  def logger
-    RAILS_DEFAULT_LOGGER
-  end
+def logger
+  RAILS_DEFAULT_LOGGER
+end
