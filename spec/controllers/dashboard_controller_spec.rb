@@ -28,26 +28,5 @@ describe DashboardController do
     it "should require authenticated user for all actions"
   end
 
-  describe "Global Links" do
-    before :each do
-      do_login
-    end
-
-    it "should show the current user name" do
-      get :index
-      response.should have_tag('div#global_links>strong','test')
-    end
-
-    it "should show a dashboard link"
-
-    it "should show an administration link only for admin users"
-
-    it "should show a logout link"
-
-    it "should require an authenticated user for all actions"
-
-  end
-
-
 end
 
