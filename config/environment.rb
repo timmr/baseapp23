@@ -25,6 +25,7 @@ Rails::Initializer.run do |config|
   config.gem "aasm"
   config.gem "will_paginate"
   config.gem "RedCloth", :lib => "redcloth"
+  config.gem "exception_notification"
   #config.gem "maruku"
 
 
