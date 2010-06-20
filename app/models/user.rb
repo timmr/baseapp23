@@ -20,6 +20,7 @@ class User < ActiveRecord::Base
   after_create :configure_user
 
   include AASM
+  
   aasm_column :state
   aasm_initial_state :initial => :pending
   aasm_state :passive
