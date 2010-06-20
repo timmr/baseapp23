@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe User do
   fixtures :roles
   
@@ -23,7 +22,6 @@ describe User do
 
   it "should send a notification email after registration" do
     user = User.new(@valid_attributes)
-    user.valid?.should be true
     user.register!
     user.state.should == "pending"
     @emails.size.should == 1
