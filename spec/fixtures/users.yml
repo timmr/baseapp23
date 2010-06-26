@@ -1,6 +1,6 @@
 ben:
     login: ben
-    email: whatever@whatever.com
+    email: ben@whatever.com
     password_salt: <%= salt = Authlogic::Random.hex_token %>
     crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
     persistence_token: <%= Authlogic::Random.hex_token %>
@@ -9,7 +9,7 @@ ben:
     state: active
 marc:
     login: marc
-    email: whatever@whatever.com
+    email: marc@whatever.com
     password_salt: <%= salt = Authlogic::Random.hex_token %>
     crypted_password: <%= Authlogic::CryptoProviders::Sha512.encrypt("test" + salt) %>
     persistence_token: <%= Authlogic::Random.hex_token %>

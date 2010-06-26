@@ -30,11 +30,12 @@ class User < ActiveRecord::Base
   aasm_state :deleted, :enter => :do_delete
 
   aasm_event :register do
-    transitions :from => :passive, :to => :pending, :on_transition => :valid?
+    transitions :from => :passive, :to => :pending, :guard => :valid?
   end
 
   aasm_event :activate do
-    transitions :from => :pending, :to => :active
+    transitions :from => :pending, :to => :active,
+      :on_transition => Proc.new { |user| UserMailer.deliver_activation(user) }
   end
 
   aasm_event :suspend do
@@ -107,16 +108,11 @@ class User < ActiveRecord::Base
     nil
   end
 
-  def recently_activated?
-    @activated
-  end
-
   def do_delete
     self.deleted_at = Time.now.utc
   end
 
   def do_activate
-    @activated = true
     self.activated_at = Time.now.utc
     self.deleted_at = nil
   end

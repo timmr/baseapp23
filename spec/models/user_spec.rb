@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  fixtures :roles
+  fixtures :roles, :users
   
   before(:each) do
     @valid_attributes = {
@@ -24,10 +24,22 @@ describe User do
     user = User.new(@valid_attributes)
     user.register!
     user.state.should == "pending"
+    user.perishable_token.should_not be_empty
     @emails.size.should == 1
     mail = @emails.first
     mail.to[0].should == 'testmail@example.com'
     mail.subject.should == '[BaseApp] Please activate your new account'
+    mail.body.should =~ /baseapp.local\/activate\/#{user.perishable_token}/
+  end
+  
+  it "should send a notification email after activation" do
+    user = users(:marc)
+    user.activate!
+    user.state.should == "active"
+    @emails.size.should == 1
+    mail = @emails.first
+    mail.to[0].should == user.email
+    mail.subject.should == '[BaseApp] Your account has been activated!'
   end
   
 end
