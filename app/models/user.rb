@@ -11,11 +11,10 @@ class User < ActiveRecord::Base
   validates_presence_of   :login
   validates_length_of     :login, :within => 3..40
   validates_uniqueness_of :login, :case_sensitive => false
-#  validates_format_of     :login, :with => RE_LOGIN_OK, :message => MSG_LOGIN_BAD
+  # validation with regex is done by authlogic
   validates_presence_of   :email
   validates_length_of     :email, :within => 6..100
   validates_uniqueness_of :email, :case_sensitive => false
-#  validates_format_of     :email, :with => RE_EMAIL_OK, :message => MSG_EMAIL_BAD
 
   after_create :configure_user
 

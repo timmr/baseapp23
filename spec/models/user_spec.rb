@@ -20,7 +20,7 @@ describe User do
     user.state.should == "passive"
   end
 
-  it "should send a notification email after registration" do
+  it "should receive a notification email after registration" do
     user = User.new(@valid_attributes)
     user.register!
     user.state.should == "pending"
@@ -32,7 +32,14 @@ describe User do
     mail.body.should =~ /baseapp.local\/activate\/#{user.perishable_token}/
   end
   
-  it "should send a notification email after activation" do
+  it "should have got a default role and empty profile after registration" do
+    user = User.new(@valid_attributes)
+    user.register!
+    user.profile.should_not be_nil
+    user.roles.select{|r| r.name == DEFAULT_USER_ROLE}.should_not be_empty
+  end
+  
+  it "should receive a notification email after activation" do
     user = users(:marc)
     user.activate!
     user.state.should == "active"
@@ -40,6 +47,30 @@ describe User do
     mail = @emails.first
     mail.to[0].should == user.email
     mail.subject.should == '[BaseApp] Your account has been activated!'
+  end
+  
+  describe "display name" do
+    
+    before(:each) do
+      @user = User.new(@valid_attributes)
+      @user.register!
+    end
+    
+    it "should be the login name if the profile is empty" do
+      @user.display_name.should == 'testuser'
+    end
+    
+    it "should be the realname if no nickname is set" do
+      @user.profile.real_name = 'Test User'
+      @user.display_name.should == 'Test User'
+    end
+    
+    it "should be the nickname if at least the nickname is set" do
+      @user.profile.nick_name = 'nick'
+      @user.profile.real_name = 'Test User'
+      @user.display_name.should == 'nick'
+    end
+        
   end
   
 end
