@@ -1,6 +1,6 @@
 require File.expand_path(File.dirname(__FILE__) + '/../spec_helper')
 
-describe "Global links" do
+describe "Global links view" do
   include MockUserHelper
   
   def derived_controller_name(*args)
@@ -52,8 +52,6 @@ describe "Global links" do
       response.should have_tag('a','Administration')
     end
     
-    it "should require an authenticated user for all actions"
-
   end
   
 end

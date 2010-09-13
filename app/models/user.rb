@@ -21,7 +21,7 @@ class User < ActiveRecord::Base
   include AASM
   
   aasm_column :state
-  aasm_initial_state :initial => :pending
+  aasm_initial_state :initial => :passive
   aasm_state :passive
   aasm_state :pending
   aasm_state :active,  :enter => :do_activate

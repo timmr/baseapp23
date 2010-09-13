@@ -36,7 +36,7 @@ describe User do
     user = User.new(@valid_attributes)
     user.register!
     user.profile.should_not be_nil
-    user.roles.select{|r| r.name == DEFAULT_USER_ROLE}.should_not be_empty
+    user.roles.collect(&:name).include?(DEFAULT_USER_ROLE).should be_true
   end
   
   it "should receive a notification email after activation" do
